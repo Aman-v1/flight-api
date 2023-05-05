@@ -19,7 +19,7 @@ exports.addFlightPath = asyncHandler(async (req, res) => {
     distance,
   });
 
-  res.json({
+  res.status(201).json({
     status: 'success',
     message: 'FlightPath created successfully',
     flightPath,
@@ -31,7 +31,7 @@ exports.addFlightPath = asyncHandler(async (req, res) => {
 // @access Public
 exports.getFlightPaths = asyncHandler(async (req, res) => {
   const flightPaths = await FlightPath.find({});
-  res.json({
+  res.status(200).json({
     status: 'success',
     count: flightPaths.length,
     data: flightPaths,
@@ -48,7 +48,7 @@ exports.getFlightPathById = asyncHandler(async (req, res) => {
     throw new HttpError(404, 'FlightPath not found');
   }
 
-  res.json({
+  res.status(200).json({
     status: 'success',
     data: flightPath,
   });
@@ -70,7 +70,7 @@ exports.updateFlightPath = asyncHandler(async (req, res) => {
     throw new HttpError(404, 'FlightPath not found');
   }
 
-  res.json({
+  res.status(200).json({
     status: 'success',
     message: 'FlightPath updated successfully',
     flightPath: updatedFlightPath,
@@ -83,7 +83,7 @@ exports.updateFlightPath = asyncHandler(async (req, res) => {
 exports.deleteFlightPath = asyncHandler(async (req, res) => {
   await FlightPath.findByIdAndDelete(req.params.id);
 
-  res.json({
+  res.status(204).json({
     status: 'success',
     message: 'FlightPath deleted successfully',
   });

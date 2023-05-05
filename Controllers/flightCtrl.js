@@ -22,7 +22,7 @@ exports.addFlight = asyncHandler(async (req, res) => {
     price,
   });
 
-  res.json({
+  res.status(201).json({
     status: 'success',
     message: 'Flight created successfully',
     flight,
@@ -36,7 +36,7 @@ exports.getFlights = asyncHandler(async (req, res) => {
   const flights = await Flight.find({}).populate({
     path: 'flightPath',
   });
-  res.json({
+  res.status(200).json({
     status: 'success',
     count: flights.length,
     data: flights,
@@ -53,7 +53,7 @@ exports.getFlightById = asyncHandler(async (req, res) => {
   if (!flight) {
     throw new HttpError(404, 'Flight not found');
   }
-  res.json({
+  res.status(200).json({
     status: 'success',
     data: flight,
   });
@@ -87,7 +87,7 @@ exports.updateFlight = asyncHandler(async (req, res) => {
     }
   }
 
-  res.json({
+  res.status(200).json({
     status: 'success',
     message: 'Flight updated successfully',
     flight,
@@ -100,7 +100,7 @@ exports.updateFlight = asyncHandler(async (req, res) => {
 exports.deleteFlight = asyncHandler(async (req, res) => {
   await Flight.findByIdAndDelete(req.params.id);
 
-  res.json({
+  res.status(204).json({
     status: 'success',
     message: 'Flight deleted successfully',
   });
@@ -144,7 +144,7 @@ exports.getFlightPrices = asyncHandler(async (req, res) => {
     formattedPrices[airline] = `₹${price.toLocaleString('en-IN')}`;
   }
 
-  res.json({
+  res.status(200).json({
     status: 'success',
     data: formattedPrices,
   });

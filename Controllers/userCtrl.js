@@ -43,7 +43,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
     email,
   });
   if (userFound && (await bcrypt.compare(password, userFound?.password))) {
-    res.json({
+    res.status(200).json({
       status: 'success',
       message: 'User logged in successfuly',
       userFound,
@@ -61,7 +61,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 exports.getUserProfile = asyncHandler(async (req, res) => {
   //find the user
   const user = await User.findById(req.userAuthId);
-  res.json({
+  res.status(200).json({
     status: 'success',
     message: 'User profile fetched successfully',
     user,
