@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const { notFound, globalErrHandler } = require('./Middlewares/globalErrHandler');
 
@@ -10,6 +11,8 @@ const userRoutes = require('./Routes/userRoutes');
 const flightPathRoutes = require('./Routes/flightPathRoutes');
 
 dotenv.config();
+//cors
+app.use(cors());
 const { Connection } = require('./config/db');
 
 const Port = process.env.PORT || 8080;
