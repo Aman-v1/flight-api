@@ -26,7 +26,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/flightPaths', flightPathRoutes);
 
 app.get('/', (req, res) => {
-  res.status(200).json('HomePage');
+  res.status(200).json(`Welcome to my flight API please check the api-docs on ${process.env.DOCS}`);
 });
 
 //err middleware
